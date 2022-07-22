@@ -21,7 +21,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 <template>
     <Head title="Email Verification" />
 
-    <JetAuthenticationCard class="min-h-screen bg-black bg-hero-warzone bg-no-repeat bg-contain mix-blend-luminosity bg-origin-padding">
+    <JetAuthenticationCard>
         <template #logo>
             <JetAuthenticationCardLogo />
         </template>
