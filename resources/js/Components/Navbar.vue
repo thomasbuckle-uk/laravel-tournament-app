@@ -18,7 +18,7 @@ const navigation = {
         {name: "Teams", href: "/teams"},
         {name: "Tournaments", href: "/tournaments"},
         {name: "Partners", href: "/partners"},
-        {name: "About", href: "/about-us"},
+        {name: "About", href: "/about"},
         {name: "Shop", href: "/shop"},
     ],
 };
