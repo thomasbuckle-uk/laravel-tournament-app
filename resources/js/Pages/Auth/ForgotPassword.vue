@@ -23,7 +23,7 @@ const submit = () => {
 <template>
     <Head title="Forgot Password" />
 
-    <JetAuthenticationCard>
+    <JetAuthenticationCard class="min-h-screen bg-black bg-hero-warzone bg-no-repeat bg-contain mix-blend-luminosity bg-origin-padding">
         <template #logo>
             <JetAuthenticationCardLogo />
         </template>
