@@ -10,6 +10,7 @@ import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 
 const form = useForm({
     name: '',
+    username: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -26,7 +27,7 @@ const submit = () => {
 <template>
     <Head title="Register" />
 
-    <JetAuthenticationCard>
+    <JetAuthenticationCard class="min-h-screen bg-black bg-hero-warzone bg-no-repeat bg-contain mix-blend-luminosity bg-origin-padding">
         <template #logo>
             <JetAuthenticationCardLogo />
         </template>
@@ -44,6 +45,19 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="name"
+                />
+            </div>
+
+            <div class="mt-4">
+                <JetLabel for="username" value="Username" />
+                <JetInput
+                    id="username"
+                    v-model="form.username"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="username"
                 />
             </div>
 

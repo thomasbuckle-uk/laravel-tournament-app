@@ -15,12 +15,62 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
+//Route::get('/', function () {
+//    return Inertia::render('Welcome', [
+//        'canLogin' => Route::has('login'),
+//        'canRegister' => Route::has('register'),
+//        'laravelVersion' => Application::VERSION,
+//        'phpVersion' => PHP_VERSION,
+//    ]);
+//});
+
+Route::get('/', static function () {
+    return Inertia::render('Main/Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+Route::get('/news', static function () {
+    return Inertia::render('Main/News', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+});
+
+Route::get('/teams', static function () {
+    return Inertia::render('Main/Teams', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+});
+
+Route::get('/tournaments', static function () {
+    return Inertia::render('Main/Tournaments', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+});
+
+
+Route::get('/partners', static function () {
+    return Inertia::render('Main/Partners', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+});
+
+Route::get('/about', static function () {
+    return Inertia::render('Main/About', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+    ]);
+});
+
+Route::get('/shop', static function () {
+    return Inertia::render('Main/Shop', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
     ]);
 });
 
