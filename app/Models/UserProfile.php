@@ -24,7 +24,7 @@ class UserProfile extends Model
      * @var string[]
      */
     protected $fillable = [
-        'country', 'gamer_tag', 'discord_username', 'twitter_username', 'twitch_username', 'age', 'about_me'
+        'country', 'gamer_tag', 'discord_username', 'twitter_username', 'twitch_username', 'age', 'about_me', 'user_id'
     ];
 
 
