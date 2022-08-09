@@ -34,8 +34,8 @@ const logout = () => {
 
         <JetBanner />
 
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="min-h-screen bg-black bg-hero-warzone bg-no-repeat bg-contain mix-blend-luminosity bg-origin-padding">
+            <nav class="bg-black border-b-4 border-[#C10013]">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -43,14 +43,28 @@ const logout = () => {
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <JetApplicationMark class="block h-9 w-auto" />
+                                    <a href="#" class="flex">
+                                        <span class="sr-only">Dashboard Home</span>
+                                        <img
+                                            class="mt-12 h-24 w-auto"
+                                            src="../../images/logo-white.png"
+                                            alt=""
+                                        />
+                                    </a>
+
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                                 <JetNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
+                                </JetNavLink>
+                                <JetNavLink :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
+                                    My Team
+                                </JetNavLink>
+                                <JetNavLink>
+                                    My Tournaments
                                 </JetNavLink>
                             </div>
                         </div>
@@ -89,36 +103,9 @@ const logout = () => {
                                                     Team Settings
                                                 </JetDropdownLink>
 
-                                                <JetDropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')">
-                                                    Create New Team
-                                                </JetDropdownLink>
 
                                                 <div class="border-t border-gray-100" />
 
-                                                <!-- Team Switcher -->
-                                                <div class="block px-4 py-2 text-xs text-gray-400">
-                                                    Switch Teams
-                                                </div>
-
-                                                <template v-for="team in $page.props.user.all_teams" :key="team.id">
-                                                    <form @submit.prevent="switchToTeam(team)">
-                                                        <JetDropdownLink as="button">
-                                                            <div class="flex items-center">
-                                                                <svg
-                                                                    v-if="team.id == $page.props.user.current_team_id"
-                                                                    class="mr-2 h-5 w-5 text-green-400"
-                                                                    fill="none"
-                                                                    stroke-linecap="round"
-                                                                    stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    stroke="currentColor"
-                                                                    viewBox="0 0 24 24"
-                                                                ><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                                                <div>{{ team.name }}</div>
-                                                            </div>
-                                                        </JetDropdownLink>
-                                                    </form>
-                                                </template>
                                             </template>
                                         </div>
                                     </template>
@@ -296,8 +283,8 @@ const logout = () => {
             </nav>
 
             <!-- Page Heading -->
-            <header v-if="$slots.header" class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header v-if="$slots.header" class=" ">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 mt-10">
                     <slot name="header" />
                 </div>
             </header>
