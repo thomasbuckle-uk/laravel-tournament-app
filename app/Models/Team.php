@@ -29,6 +29,19 @@ class Team extends JetstreamTeam
     protected $fillable = [
         'name',
         'personal_team',
+        'description',
+        'twitter_username',
+        'twitch_username',
+        'website_url'
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'profile_photo_path',
     ];
 
     /**

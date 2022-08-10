@@ -14,7 +14,9 @@ const props = defineProps({
 });
 
 const form = useForm({
-    name: props.team.description,
+    description: props.team.description,
+    twitter_username: props.team.twitter_username,
+    twitch_username: props.team.twitch_username,
 });
 
 const updateTeamDescription = () => {
@@ -46,12 +48,25 @@ const updateTeamDescription = () => {
                 <JetInput
                     id="description"
                     v-model="form.description"
+                    type="textarea"
+                    rows="4"
+                    class="mt-1 block w-full"
+                    :disabled="! permissions.canUpdateTeam"
+                />
+                <JetInputError :message="form.errors.description" class="mt-2" />
+
+                <JetLabel for="twitter_username" value="Twitter" />
+
+                <JetInput
+                    id="twitter_username"
+                    v-model="form.twitter_username"
                     type="text"
                     class="mt-1 block w-full"
                     :disabled="! permissions.canUpdateTeam"
                 />
+                <JetInputError :message="form.errors.twitter_username" class="mt-2" />
 
-                <JetInputError :message="form.errors.description" class="mt-2" />
+
             </div>
 
         </template>
