@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Laravel\Jetstream\Jetstream;
 
 /*
 |--------------------------------------------------------------------------

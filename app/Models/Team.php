@@ -35,14 +35,7 @@ class Team extends JetstreamTeam
         'website_url'
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'profile_photo_path',
-    ];
+
 
     /**
      * The event map for the model.
