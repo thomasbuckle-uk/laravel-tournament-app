@@ -12,11 +12,8 @@ defineProps({
 
 
 const navigation = [
-    {name: 'Account', href: '#', icon: UserCircleIcon, current: true},
-    {name: 'Password', href: '#', icon: KeyIcon, current: false},
-    {name: 'Plan & Billing', href: '#', icon: CreditCardIcon, current: false},
-    {name: 'Team', href: '#', icon: UserGroupIcon, current: false},
-    {name: 'Integrations', href: '#', icon: ViewGridAddIcon, current: false},
+    {name: 'Team Settings', href: '#', icon: UserCircleIcon, current: true},
+    {name: 'Team Members', href: '#', icon: UserGroupIcon, current: false},
 ]
 </script>
 
@@ -24,7 +21,7 @@ const navigation = [
     <AppLayout title="Team Settings">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-300 leading-tight">
-                My Team
+                My Team -
             </h2>
         </template>
 
