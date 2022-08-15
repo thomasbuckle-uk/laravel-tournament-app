@@ -123,5 +123,5 @@ Route::get('/tournaments/overview', static function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
-});
+})->name('tournaments.overview');
 

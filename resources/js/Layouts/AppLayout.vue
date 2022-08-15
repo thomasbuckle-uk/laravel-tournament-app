@@ -26,6 +26,7 @@ const switchToTeam = (team) => {
 const logout = () => {
     Inertia.post(route('logout'));
 };
+
 </script>
 
 <template>
@@ -63,7 +64,7 @@ const logout = () => {
                                 <JetNavLink :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
                                     My Team
                                 </JetNavLink>
-                                <JetNavLink>
+                                <JetNavLink :href="route('tournaments.overview')">
                                     My Tournaments
                                 </JetNavLink>
                             </div>
