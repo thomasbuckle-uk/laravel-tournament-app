@@ -61,10 +61,10 @@ const logout = () => {
                                 <JetNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </JetNavLink>
-                                <JetNavLink :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
+                                <JetNavLink :href="route('dash.teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
                                     My Team
                                 </JetNavLink>
-                                <JetNavLink :href="route('tournaments.overview')">
+                                <JetNavLink :href="route('tournaments.overview')" :active="route().current('tournaments.overview')">
                                     My Tournaments
                                 </JetNavLink>
                             </div>

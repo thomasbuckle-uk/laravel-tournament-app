@@ -16,9 +16,9 @@ const form = useForm({
     name: props.team.name,
 });
 
-const updateTeamName = () => {
-    form.put(route('teams.update', props.team), {
-        errorBag: 'updateTeamName',
+const updateProfileInformation = () => {
+    form.put(route('dashboard.teams.update', props.team), {
+        errorBag: 'updateProfileInformation',
         preserveScroll: true,
     });
 };
@@ -40,7 +40,7 @@ const updateTeamName = () => {
   ```
 -->
 <template>
-    <form action="#" method="POST">
+    <form @submitted="updateProfileInformation">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
                 <div>
@@ -51,13 +51,14 @@ const updateTeamName = () => {
 
                 <div class="grid grid-cols-3 gap-6">
                     <div class="col-span-3 sm:col-span-2">
-                        <label for="company-website"
+                        <label for="teamname"
                                class="block text-sm font-medium text-gray-700">
                             Team Name </label>
                         <div class="mt-1 rounded-md shadow-sm flex">
 
-                            <input type="text" name="username" id="username"
-                                   autocomplete="username"
+                            <input type="text" name="teamname" id="teamname"
+                                   autocomplete="teamname"
+                                   v-model="team.name"
                                    class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"/>
                         </div>
                     </div>
@@ -68,6 +69,7 @@ const updateTeamName = () => {
                         <div class="mt-1">
                                                     <textarea id="about" name="about" rows="3"
                                                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                                                              v-model="team.description"
                                                               placeholder="Our awesome team wins every game!"/>
                         </div>
                         <p class="mt-2 text-sm text-gray-500">Brief description for your

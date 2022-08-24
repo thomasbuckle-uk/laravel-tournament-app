@@ -1,5 +1,7 @@
 <?php
 
+use App\Actions\Jetstream\UpdateTeamProfileInformation;
+use App\Http\Controllers\TeamDashController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -88,40 +90,40 @@ Route::middleware([
 
 
 //Dashboard Teams Page
-Route::get('/teams/{id}', static function () {
-    return Inertia::render('Teams/Show', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/teams/{id}/overview', [TeamDashController::class, 'showOverview'])->name("dash.teams.show");
+    Route::put('teams/{id}/overview', [TeamDashController::class, 'overviewUpdate']);
+
+    Route::get('/teams/{id}/settings',[TeamDashController::class, 'showSettings']);
+
+    Route::get('/teams/{id}/stats', [TeamDashController::class, 'showStats']);
+
+    Route::get('/teams/{id}/members', [TeamDashController::class, 'showMembers']);
 });
 
-Route::get('/teams/{id}/settings', static function () {
-    return Inertia::render('Teams/Settings/Show', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
-});
 
-Route::get('/teams/{id}/stats', static function () {
-    return Inertia::render('Teams/Stats/Show', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
-});
 
-Route::get('/teams/{id}/members', static function () {
-    return Inertia::render('Teams/Members/Show', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
-});
 
 
 // Dashboard Tournaments Section
-Route::get('/tournaments/overview', static function () {
-    return Inertia::render('Tournaments/Overview/Show', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
-})->name('tournaments.overview');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group( function() {
+    Route::get('/tournaments/overview', static function () {
+        return Inertia::render('Tournaments/Overview/Show', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+        ]);
+    })->name('tournaments.overview');
+});
+
+
+
+
 
