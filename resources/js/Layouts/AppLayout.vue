@@ -61,7 +61,7 @@ const logout = () => {
                                 <JetNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </JetNavLink>
-                                <JetNavLink :href="route('dash.teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
+                                <JetNavLink :href="route('dash.team.overview.show')" :active="route().current('dash.team.overview.show')">
                                     My Team
                                 </JetNavLink>
                                 <JetNavLink :href="route('tournaments.overview')" :active="route().current('tournaments.overview')">
@@ -242,10 +242,10 @@ const logout = () => {
                                     Manage Team
                                 </div>
 
-                                <!-- Team Settings -->
-                                <JetResponsiveNavLink :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">
-                                    Team Settings
-                                </JetResponsiveNavLink>
+<!--                                &lt;!&ndash; Team Settings &ndash;&gt;-->
+<!--                                <JetResponsiveNavLink :href="route('teams.show', $page.props.user.current_team)" :active="route().current('teams.show')">-->
+<!--                                    Team Settings-->
+<!--                                </JetResponsiveNavLink>-->
 
                                 <JetResponsiveNavLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')" :active="route().current('teams.create')">
                                     Create New Team

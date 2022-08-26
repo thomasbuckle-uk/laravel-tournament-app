@@ -95,17 +95,15 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/teams/{id}/overview', [TeamDashController::class, 'showOverview'])->name("dash.teams.show");
-    Route::put('teams/{id}/overview', [TeamDashController::class, 'overviewUpdate']);
+    Route::get('/team/overview', [TeamDashController::class, 'showOverview'])->name("dash.team.overview.show");
 
-    Route::get('/teams/{id}/settings',[TeamDashController::class, 'showSettings']);
 
-    Route::get('/teams/{id}/stats', [TeamDashController::class, 'showStats']);
+    Route::get('/team/settings',[TeamDashController::class, 'showSettings']);
 
-    Route::get('/teams/{id}/members', [TeamDashController::class, 'showMembers']);
+    Route::get('/teams/stats', [TeamDashController::class, 'showStats']);
+
+    Route::get('/team/members', [TeamDashController::class, 'showMembers']);
 });
-
-
 
 
 

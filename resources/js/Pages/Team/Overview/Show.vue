@@ -1,9 +1,9 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import DeleteTeamForm from '@/Pages/Teams/Partials/DeleteTeamForm.vue';
+import DeleteTeamForm from '@/Pages/Team/Partials/DeleteTeamForm.vue';
 import JetSectionBorder from '@/Jetstream/SectionBorder.vue';
 import {UserCircleIcon, UserGroupIcon} from '@heroicons/vue/outline'
-import UpdateTeamInformationForm from "@/Pages/Teams/Partials/UpdateTeamInformationForm.vue";
+import UpdateTeamInformationForm from "@/Pages/Team/Partials/UpdateTeamInformationForm.vue";
 import {Inertia} from "@inertiajs/inertia";
 
 
@@ -13,9 +13,9 @@ defineProps({
     permissions: Object,
 });
 
-let baseUrl = Inertia.page.url;
+let baseUrl = '/team';
 const navigation = [
-    {name: 'Overview', href: baseUrl, icon: UserCircleIcon, current: true},
+    {name: 'Overview', href: baseUrl + '/overview', icon: UserCircleIcon, current: true},
     {name: 'Members', href: baseUrl + '/members', icon: UserCircleIcon, current: false},
     {name: 'Stats', href: baseUrl + '/stats', icon: UserGroupIcon, current: false},
     {name: 'Settings', href: baseUrl + '/settings', icon: UserGroupIcon, current: false},
