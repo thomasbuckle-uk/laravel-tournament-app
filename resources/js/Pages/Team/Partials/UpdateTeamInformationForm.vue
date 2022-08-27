@@ -1,28 +1,4 @@
-<script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
-import JetActionMessage from '@/Jetstream/ActionMessage.vue';
-import JetButton from '@/Jetstream/Button.vue';
-import JetFormSection from '@/Jetstream/FormSection.vue';
-import JetInput from '@/Jetstream/Input.vue';
-import JetInputError from '@/Jetstream/InputError.vue';
-import JetLabel from '@/Jetstream/Label.vue';
 
-const props = defineProps({
-    team: Object,
-    permissions: Object,
-});
-
-const form = useForm({
-    name: props.team.name,
-});
-
-const updateProfileInformation = () => {
-    form.put(route('dashboard.teams.update', props.team), {
-        errorBag: 'updateProfileInformation',
-        preserveScroll: true,
-    });
-};
-</script>
 <!--
   This example requires Tailwind CSS v2.0+
 
@@ -40,7 +16,7 @@ const updateProfileInformation = () => {
   ```
 -->
 <template>
-    <form @submitted="updateProfileInformation">
+    <form @submit.prevent="submit">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="bg-white py-6 px-4 space-y-6 sm:p-6">
                 <div>
@@ -58,7 +34,7 @@ const updateProfileInformation = () => {
 
                             <input type="text" name="teamname" id="teamname"
                                    autocomplete="teamname"
-                                   v-model="team.name"
+                                   v-model="form.name"
                                    class="focus:ring-indigo-500 focus:border-indigo-500 flex-grow block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"/>
                         </div>
                     </div>
@@ -69,7 +45,7 @@ const updateProfileInformation = () => {
                         <div class="mt-1">
                                                     <textarea id="about" name="about" rows="3"
                                                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                                              v-model="team.description"
+                                                              v-model="form.description"
                                                               placeholder="Our awesome team wins every game!"/>
                         </div>
                         <p class="mt-2 text-sm text-gray-500">Brief description for your
@@ -134,3 +110,33 @@ const updateProfileInformation = () => {
 </template>
 
 
+<script setup>
+
+import {Inertia} from "@inertiajs/inertia";
+import {reactive} from "vue";
+
+
+
+
+
+
+const props = defineProps({
+    team: Object,
+    permissions: Object,
+});
+
+const form = reactive({
+    name: props.team.name,
+    description: props.team.description
+});
+const submit = () => {
+    console.log('submitted');
+
+    Inertia.put(route('dash.teams.overview.update'),  form,{
+        errorBag: 'updateProfileInformation',
+        preserveScroll: true,
+
+    });
+};
+
+</script>

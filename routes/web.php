@@ -96,6 +96,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/team/overview', [TeamDashController::class, 'showOverview'])->name("dash.team.overview.show");
+    Route::put('/team/overview', [UpdateTeamProfileInformation::class, 'update'])->name("dash.teams.overview.update");
 
 
     Route::get('/team/settings',[TeamDashController::class, 'showSettings']);
