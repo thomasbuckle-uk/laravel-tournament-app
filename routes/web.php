@@ -101,7 +101,7 @@ Route::middleware([
 
     Route::get('/team/settings',[TeamDashController::class, 'showSettings']);
 
-    Route::get('/teams/stats', [TeamDashController::class, 'showStats']);
+    Route::get('/team/stats', [TeamDashController::class, 'showStats']);
 
     Route::get('/team/members', [TeamDashController::class, 'showMembers']);
 });

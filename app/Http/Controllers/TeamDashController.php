@@ -67,11 +67,12 @@ class TeamDashController extends Controller
     public function showMembers(Request $request): Response
     {
         $team = Jetstream::newTeamModel()->findOrFail($request->user()->current_team_id);
+
         Gate::authorize('view', $team);
 
         return Jetstream::inertia()->render($request, 'Team/Members/Show', [
             'user' => $request->user(),
-            'team' => $team,
+            'team' => $team->load('owner', 'users', 'teamInvitations'),
             'permissions' => [
                 'canAddTeamMembers' => Gate::check('addTeamMember', $team),
                 'canDeleteTeam' => Gate::check('delete', $team),
@@ -89,7 +90,7 @@ class TeamDashController extends Controller
         $team = Jetstream::newTeamModel()->findOrFail($request->user()->current_team_id);
         Gate::authorize('view', $team);
 
-        return Jetstream::inertia()->render($request, 'Team/Members/Show', [
+        return Jetstream::inertia()->render($request, 'Team/Stats/Show', [
             'user' => $request->user(),
             'team' => $team,
             'permissions' => [

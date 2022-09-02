@@ -103,19 +103,19 @@ const displayableRole = (role) => {
                 </template>
 
                 <template #description>
-                    Add a new team member to your team, allowing them to collaborate with you.
+                    Add a new team member to your team
                 </template>
 
                 <template #form>
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600">
-                            Please provide the email address of the person you would like to add to this team.
+                            Please provide the email address or username of the person you would like to add to this team.
                         </div>
                     </div>
 
                     <!-- Member Email -->
                     <div class="col-span-6 sm:col-span-4">
-                        <JetLabel for="email" value="Email" />
+                        <JetLabel for="email" value="Email or Username" />
                         <JetInput
                             id="email"
                             v-model="addTeamMemberForm.email"
