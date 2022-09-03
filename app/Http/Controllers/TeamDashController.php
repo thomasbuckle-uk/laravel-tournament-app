@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Response;
+use Laravel\Jetstream\Actions\ValidateTeamDeletion;
+use Laravel\Jetstream\Contracts\DeletesTeams;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Jetstream\RedirectsActions;
 
@@ -58,6 +61,25 @@ class TeamDashController extends Controller
             'availablePermissions' => Jetstream::$permissions,
             'defaultPermissions' => Jetstream::$defaultPermissions,
         ]);
+    }
+
+    /**
+     * Delete the given team.
+     *
+     * @param Request $request
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function deleteTeam(Request $request)
+    {
+        $team = Jetstream::newTeamModel()->findOrFail($request->user()->current_team_id);
+
+        Gate::forUser($request->user())->authorize('delete', $team);
+
+        $deleter = app(DeletesTeams::class);
+
+        $deleter->delete($team);
+
+        return $this->redirectPath($deleter);
     }
 
     /**

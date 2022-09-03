@@ -100,7 +100,7 @@ Route::middleware([
 
 
     Route::get('/team/settings',[TeamDashController::class, 'showSettings']);
-
+    Route::delete('/team/settings', [TeamDashController::class, 'deleteTeam'])->name("dash.team.delete");
     Route::get('/team/stats', [TeamDashController::class, 'showStats']);
 
     Route::get('/team/members', [TeamDashController::class, 'showMembers']);
