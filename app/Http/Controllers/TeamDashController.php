@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -20,8 +21,20 @@ class TeamDashController extends Controller
      */
     public function showOverview(Request $request)
     {
-        $team = Jetstream::newTeamModel()->findOrFail($request->user()->current_team_id);
-        Gate::authorize('view', $team);
+
+        try {
+            $team = Jetstream::newTeamModel()->findOrFail($request->user()->current_team_id);
+            Gate::authorize('view', $team);
+        } catch (ModelNotFoundException $e) {
+            return Jetstream::inertia()->render($request, 'Team/Create', [
+                'user' => $request->user(),
+                'team' => null,
+                'availableRoles' => array_values(Jetstream::$roles),
+                'availablePermissions' => Jetstream::$permissions,
+                'defaultPermissions' => Jetstream::$defaultPermissions,
+            ]);
+        }
+
 
         return Jetstream::inertia()->render($request, 'Team/Overview/Show', [
             'user' => $request->user(),
