@@ -2,66 +2,107 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Orchid\Presenters\UserPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Jetstream\HasTeams;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
+use Orchid\Access\UserAccess;
+use Orchid\Access\UserInterface;
+use Orchid\Filters\Filterable;
+use Orchid\Metrics\Chartable;
+use Orchid\Platform\Models\User as Authenticatable;
+use Orchid\Screen\AsSource;
+use Orchid\Support\Facades\Dashboard;
 
-class User extends Authenticatable
+class User extends Authenticatable implements UserInterface
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasProfilePhoto;
-    use HasTeams;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
+    use Notifiable, UserAccess, AsSource, Filterable, Chartable, HasFactory;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var string[]
+     * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password',
+        'name',
+        'username',
+        'email',
+        'password',
+        'permissions',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
     protected $hidden = [
         'password',
         'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
+        'permissions',
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'permissions'          => 'array',
+        'email_verified_at'    => 'datetime',
     ];
 
     /**
-     * The accessors to append to the model's array form.
+     * The attributes for which you can use filters in url.
      *
      * @var array
      */
-    protected $appends = [
-        'profile_photo_url',
+    protected $allowedFilters = [
+        'id',
+        'name',
+        'username',
+        'email',
+        'permissions',
     ];
 
-    public function userProfile(): HasOne
+    /**
+     * The attributes for which can use sort in url.
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'id',
+        'name',
+        'username',
+        'email',
+        'updated_at',
+        'created_at',
+    ];
+
+    /**
+     * @param string $name
+     * @param string $email
+     * @param string $password
+     *
+     * @throws \Throwable
+     */
+    public static function createAdmin(string $name, string $email, string $password)
     {
-        return $this->hasOne(UserProfile::class);
+        throw_if(static::where('email', $email)->exists(), 'User exist');
+
+        static::create([
+            'name'        => $name,
+            'email'       => $email,
+            'password'    => Hash::make($password),
+            'permissions' => Dashboard::getAllowAllPermission(),
+        ]);
+    }
+
+    /**
+     * @return UserPresenter
+     */
+    public function presenter()
+    {
+        return new UserPresenter($this);
     }
 }
