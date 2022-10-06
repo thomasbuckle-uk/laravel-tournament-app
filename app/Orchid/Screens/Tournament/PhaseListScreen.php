@@ -19,6 +19,7 @@ class PhaseListScreen extends Screen
      */
     public function query(): iterable
     {
+        # Return all "Phases" with their attached settings
         return [
             'phases' => Phase::with('phase_settings')
 

@@ -2,18 +2,31 @@
 
 namespace App\Orchid\Screens\Tournament;
 
+use App\Models\Phase;
+use App\Orchid\Layouts\System\Phase\PhaseEditLayout;
+use Orchid\Screen\Action;
+use Orchid\Screen\Actions\Button;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Screen;
 
 class PhaseEditScreen extends Screen
 {
+
+
+    public $phase;
+
     /**
      * Query data.
      *
      * @return array
      */
-    public function query(): iterable
+    public function query(Phase $phase): iterable
     {
-        return [];
+        $phase->load(['settings']);
+        return [
+            'phase' => $phase,
+        ];
     }
 
     /**
@@ -23,26 +36,70 @@ class PhaseEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'PhaseEditScreen';
+        return $this->phase->exists ? 'Edit Phase' : 'Create Phase';
+    }
+
+    /**
+     * Display header description.
+     *
+     * @return string|null
+     */
+    public function description(): ?string
+    {
+        return 'Here we create a tournament Phase and apply any relevent settings it may require. Read Docs for more info';
+    }
+
+    /**
+     * @return iterable|null
+     */
+    public function permission(): ?iterable
+    {
+        return [
+            'platform.systems.phases',
+        ];
     }
 
     /**
      * Button commands.
      *
-     * @return \Orchid\Screen\Action[]
+     * @return Action[]
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+
+
+            Button::make(__('Remove'))
+                ->icon('trash')
+                ->confirm(__('Once the phase is deleted, all of its resources and data will be permanently deleted. Before deleting, please ensure this phase is not being used. DEV TODO - Apply disable button + soft delete'))
+                ->method('remove')
+                ->canSee($this->phase->exists),
+
+            Button::make(__('Save'))
+                ->icon('check')
+                ->method('save'),
+        ];
     }
 
     /**
      * Views.
      *
-     * @return \Orchid\Screen\Layout[]|string[]
+     * @return Layout[]|string[]
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+
+            Layout::block(PhaseEditLayout::class)
+            ->title(__('Phase Information'))
+            ->description(__('Enter Phase Name and Description here'))
+            ->commands(
+                Button::make(__('Save'))
+                ->type(Color::DEFAULT())
+                ->icon('check')
+                ->canSee($this->phase->exists)
+                ->method('save')
+            )
+        ];
     }
 }

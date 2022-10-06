@@ -118,6 +118,7 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 
 
 // Platform > System > Phases
+// List of Phases
 Route::screen('/phases', PhaseListScreen::class)
     ->name('platform.systems.phases')
     ->breadcrumbs(function (Trail $trail) {
