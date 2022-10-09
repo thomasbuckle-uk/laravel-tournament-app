@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\Tournament;
 
 use App\Models\Phase;
+use App\Orchid\Layouts\System\Phase\PhaseListLayout;
+use App\Orchid\Layouts\User\UserFiltersLayout;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;
@@ -12,6 +14,8 @@ use Orchid\Screen\Screen;
 
 class PhaseListScreen extends Screen
 {
+
+
     /**
      * Query data.
      *
@@ -21,8 +25,7 @@ class PhaseListScreen extends Screen
     {
         # Return all "Phases" with their attached settings
         return [
-            'phases' => Phase::with('phase_settings')
-
+            'phase' => Phase::paginate(),
         ];
     }
 
@@ -76,6 +79,9 @@ class PhaseListScreen extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+
+            PhaseListLayout::class,
+        ];
     }
 }

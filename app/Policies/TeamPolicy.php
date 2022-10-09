@@ -37,9 +37,9 @@ class TeamPolicy
      * Determine whether the user can create models.
      *
      * @param User $user
-     * @return mixed
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return true;
     }
@@ -49,9 +49,9 @@ class TeamPolicy
      *
      * @param User $user
      * @param Team $team
-     * @return mixed
+     * @return bool
      */
-    public function update(User $user, Team $team)
+    public function update(User $user, Team $team): bool
     {
         return $user->ownsTeam($team);
     }

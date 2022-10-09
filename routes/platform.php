@@ -135,3 +135,12 @@ Route::screen('/phases/create', PhaseEditScreen::class)
             ->parent('platform.index')
             ->push(__('Phases'), route('platform.systems.phases'));
     });
+
+// Platform > System > Roles > Role
+Route::screen('phases/{phase}/edit', PhaseEditScreen::class)
+    ->name('platform.systems.phases.edit')
+    ->breadcrumbs(function (Trail $trail, $phase) {
+        return $trail
+            ->parent('platform.systems.phases')
+            ->push(__('Role'), route('platform.systems.phases.edit', $phase));
+    });

@@ -4,6 +4,8 @@ namespace App\Orchid\Screens\Tournament;
 
 use App\Models\Phase;
 use App\Orchid\Layouts\System\Phase\PhaseEditLayout;
+use App\Orchid\Layouts\System\Phase\PhaseSettingEditLayout;
+use App\Orchid\Layouts\System\Phase\PhaseSettingsListLayout;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Support\Color;
@@ -99,7 +101,15 @@ class PhaseEditScreen extends Screen
                 ->icon('check')
                 ->canSee($this->phase->exists)
                 ->method('save')
-            )
+            ),
+
+            Layout::block(PhaseSettingEditLayout::class)
+                ->title(__('Phase Settings'))
+                ->description(__('Enter Phase Settings here, you can create as many key -> value rows as you wish'))
+            ,
+
+            Layout::block(PhaseSettingsListLayout::class)
+            ->title('Current Settings')
         ];
     }
 }
