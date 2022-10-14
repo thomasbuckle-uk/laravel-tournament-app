@@ -3,11 +3,13 @@
 namespace App\Orchid\Screens\Tournament;
 
 use App\Models\Phase;
+use App\Models\PhaseSetting;
 use App\Orchid\Layouts\System\Phase\PhaseEditLayout;
 use App\Orchid\Layouts\System\Phase\PhaseSettingEditLayout;
 use App\Orchid\Layouts\System\Phase\PhaseSettingsListLayout;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Screen;
@@ -16,7 +18,10 @@ class PhaseEditScreen extends Screen
 {
 
 
-    public $phase;
+    /**
+     * @var Phase
+     */
+    public Phase $phase;
 
     /**
      * Query data.
@@ -28,6 +33,7 @@ class PhaseEditScreen extends Screen
         $phase->load(['settings']);
         return [
             'phase' => $phase,
+            'phase_settings' => $phase->settings()->get()
         ];
     }
 
@@ -90,26 +96,49 @@ class PhaseEditScreen extends Screen
      */
     public function layout(): iterable
     {
-        return [
+        if ($this->phase->exists) {
+            return [
 
-            Layout::block(PhaseEditLayout::class)
-            ->title(__('Phase Information'))
-            ->description(__('Enter Phase Name and Description here'))
-            ->commands(
-                Button::make(__('Save'))
-                ->type(Color::DEFAULT())
-                ->icon('check')
-                ->canSee($this->phase->exists)
-                ->method('save')
-            ),
+                Layout::block(PhaseEditLayout::class)
+                    ->title(__('Phase Information'))
+                    ->description(__('Enter Phase Name and Description here'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->canSee($this->phase->exists)
+                            ->method('save')
+                    ),
 
-            Layout::block(PhaseSettingEditLayout::class)
-                ->title(__('Phase Settings'))
-                ->description(__('Enter Phase Settings here, you can create as many key -> value rows as you wish'))
-            ,
+                Layout::block(PhaseSettingEditLayout::class)
+                    ->title(__('Phase Settings'))
+                    ->description(__('Enter Phase Settings here, you can create as many key -> value rows as you wish'))
+                ,
 
-            Layout::block(PhaseSettingsListLayout::class)
-            ->title('Current Settings')
-        ];
+
+                Layout::block(PhaseSettingsListLayout::class)
+                    ->title('Current Settings')
+
+            ];
+        } else {
+            return [
+
+                Layout::block(PhaseEditLayout::class)
+                    ->title(__('Phase Information'))
+                    ->description(__('Enter Phase Name and Description here'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->canSee($this->phase->exists)
+                            ->method('save')
+                    ),
+
+                Layout::block(PhaseSettingEditLayout::class)
+                    ->title(__('Phase Settings'))
+                    ->description(__('Enter Phase Settings here, you can create as many key -> value rows as you wish'))
+                ,
+            ];
+        }
     }
 }

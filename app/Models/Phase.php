@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Orchid\Access\RoleAccess;
 use Orchid\Filters\Filterable;
-use Orchid\Metrics\Chartable;
-use Orchid\Screen\AsSource;
+use Orchid\Screen\AsMultiSource;
 
 class Phase extends Model
 {
-    use Filterable, AsSource;
+    use Filterable, AsMultiSource;
 
 
     protected $fillable = [

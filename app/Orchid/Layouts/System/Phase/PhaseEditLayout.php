@@ -14,7 +14,7 @@ class PhaseEditLayout extends Rows
      *
      * @return Field[]
      */
-    public function fields(): iterable
+    public function fields(): array
     {
         return [
             Input::make('phase.phase_name')
