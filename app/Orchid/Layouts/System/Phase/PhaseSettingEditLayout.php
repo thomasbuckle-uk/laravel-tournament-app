@@ -20,20 +20,17 @@ class PhaseSettingEditLayout extends Rows
             Input::make('phase_settings.name')
             ->type('text')
             ->max('255')
-            ->required()
             ->title(__('Name'))
             ->placeholder(__('Phase Setting Name')),
 
             Input::make('phase_settings.data_type')
                 ->type('text')
                 ->max('255')
-                ->required()
                 ->title(__('Data Type'))
                 ->placeholder(__('Type of Data - Number, Text etc')),
 
             Input::make('phase_settings.description')
                 ->type('text')
-                ->required()
                 ->title(__('Description'))
                 ->placeholder(__('Description Text')),
 

@@ -7,12 +7,14 @@ use App\Models\PhaseSetting;
 use App\Orchid\Layouts\System\Phase\PhaseEditLayout;
 use App\Orchid\Layouts\System\Phase\PhaseSettingEditLayout;
 use App\Orchid\Layouts\System\Phase\PhaseSettingsListLayout;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Fields\Relation;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Toast;
 
 class PhaseEditScreen extends Screen
 {
@@ -54,7 +56,7 @@ class PhaseEditScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Here we create a tournament Phase and apply any relevent settings it may require. Read Docs for more info';
+        return 'Here we create a tournament Phase and apply any relevant settings it may require. Read Docs for more info';
     }
 
     /**
@@ -103,21 +105,28 @@ class PhaseEditScreen extends Screen
                     ->title(__('Phase Information'))
                     ->description(__('Enter Phase Name and Description here'))
                     ->commands(
-                        Button::make(__('Save'))
+                        Button::make(__('Save Info'))
                             ->type(Color::DEFAULT())
                             ->icon('check')
                             ->canSee($this->phase->exists)
-                            ->method('save')
+                            ->method('saveInfo')
                     ),
 
                 Layout::block(PhaseSettingEditLayout::class)
                     ->title(__('Phase Settings'))
                     ->description(__('Enter Phase Settings here, you can create as many key -> value rows as you wish'))
-                ,
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->canSee($this->phase->exists)
+                            ->method('saveSettings')
+                    ),
 
 
                 Layout::block(PhaseSettingsListLayout::class)
-                    ->title('Current Settings')
+                    ->title('Current Settings'),
+
 
             ];
         } else {
@@ -125,20 +134,38 @@ class PhaseEditScreen extends Screen
 
                 Layout::block(PhaseEditLayout::class)
                     ->title(__('Phase Information'))
-                    ->description(__('Enter Phase Name and Description here'))
-                    ->commands(
-                        Button::make(__('Save'))
-                            ->type(Color::DEFAULT())
-                            ->icon('check')
-                            ->canSee($this->phase->exists)
-                            ->method('save')
-                    ),
+                    ->description(__('Enter Phase Name and Description here')),
 
-                Layout::block(PhaseSettingEditLayout::class)
-                    ->title(__('Phase Settings'))
-                    ->description(__('Enter Phase Settings here, you can create as many key -> value rows as you wish'))
-                ,
+//
+//                Layout::block(PhaseSettingEditLayout::class)
+//                    ->title(__('Phase Settings'))
+//                    ->description(__('Enter Phase Settings here, you can create as many key -> value rows as you wish'))
+//                ,
             ];
         }
+    }
+
+    public function save(Phase $phase, Request $request)
+    {
+        $phase->fill($request->collect('phase')->except(['phase_name_slug'])->toArray())
+            ->fill(['phase_name_slug' => Str::of($request->input('phase.phase_name'))->slug('-') ])
+            ->save();
+        Toast::info(__('Phase was saved. Now Configure Phase Settings'));
+        return redirect()->route('platform.systems.phases');
+
+    }
+
+    public function saveInfo(Phase $phase, Request $request){
+        $phase->fill($request->collect('phase')->except(['phase_name_slug'])->toArray())
+            ->fill(['phase_name_slug' => Str::of($request->input('phase.phase_name'))->slug('-') ])
+            ->save();
+        Toast::info(__('Phase Information was updated'));
+    }
+
+    public function saveSettings(Phase $phase, Request $request){
+        $data = $request->collect('phase_settings')->except(['values'])->toArray();
+
+        $data['values'] = json_encode($request->input('phase_settings.values'));
+        $phase->settings()->create($data);
     }
 }

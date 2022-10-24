@@ -39,12 +39,13 @@ class PhaseSettingsListLayout extends Table
                 TD::make('values', __('Values'))
                     ->cantHide()
                     ->render(function (PhaseSetting $target){
-                        $arr = (array) json_decode($target->values);
+
+                        $arr = (array) json_decode($target->values, true);
                         $output = '';
                         foreach ( $arr as $key => $val) {
-                            $output .= '<li> '. $key . ' : ' . $val .'</li>' ;
+                            $output .= '<li> Value: ' . $val['Value'] .'</li>
+                                        <li>Attribute: ' . $val['Attribute'] .'</li>' ;
                         }
-
                         return $output;
 
                     }),
