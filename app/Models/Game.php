@@ -25,12 +25,12 @@ class Game extends Model
     ];
 
 
-    protected $fillable = ["
+    protected $fillable = [
     'game_title',
     'short_title',
-    'available_platforms,
+    'available_platforms',
     'state_active'
-    "];
+    ];
 
 //    public function platform(): HasMany
 //    {

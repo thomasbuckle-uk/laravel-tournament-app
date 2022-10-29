@@ -6,7 +6,6 @@ namespace App\Orchid\Screens\Tournament;
 
 use App\Models\Phase;
 use App\Orchid\Layouts\System\Phase\PhaseListLayout;
-use App\Orchid\Layouts\User\UserFiltersLayout;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;

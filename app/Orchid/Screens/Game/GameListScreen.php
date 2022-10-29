@@ -75,7 +75,7 @@ class GameListScreen extends Screen
     public function layout(): iterable
     {
         return [
-
+            GameListLayout::class,
         ];
     }
 }

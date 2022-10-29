@@ -6,6 +6,7 @@ use App\Models\Game;
 use App\Orchid\Layouts\System\Game\GameEditLayout;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -73,7 +74,11 @@ class GameEditScreen extends Screen
 
             Button::make(__('Remove'))
                 ->icon('trash')
-                ->confirm(__('Once the Game is deleted, all of its resources and data will be permanently deleted. Before deleting, please ensure this Game is not being used. DEV TODO - Apply disable button + soft delete'))
+                ->confirm(
+                    __(
+                        'Once the Game is deleted, all of its resources and data will be permanently deleted. Before deleting, please ensure this Game is not being used. DEV TODO - Apply disable button + soft delete'
+                    )
+                )
                 ->method('remove')
                 ->canSee($this->game->exists),
 
@@ -104,13 +109,15 @@ class GameEditScreen extends Screen
                 ->title(__('Game Information'))
                 ->description(__('Enter Game information here')),
         ];
-
     }
 
 
     public function save(Game $game, Request $request): RedirectResponse
     {
-        $game->fill($request->collect('game')->toArray())
+        $game->fill(
+            $request->collect('game')->except(['short_title'])
+                ->toArray()
+        )->fill(['short_title' => Str::of($request->input('game.game_title'))->slug('-') ])
             ->save();
         Toast::info(__('Game was saved.'));
         return redirect()->route('platform.systems.games');
