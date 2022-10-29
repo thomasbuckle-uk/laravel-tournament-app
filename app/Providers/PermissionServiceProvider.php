@@ -26,7 +26,8 @@ class PermissionServiceProvider extends ServiceProvider
     public function boot(Dashboard $dashboard): void
     {
         $permissions = ItemPermission::group('Platform Configuration')
-            ->addPermission('platform.systems.phases', 'Tournaments');
+            ->addPermission('platform.systems.phases', 'Tournaments')
+            ->addPermission('platform.systems.games', 'Games');
 
         $dashboard->registerPermissions($permissions);
     }

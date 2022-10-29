@@ -35,13 +35,16 @@ class PlatformProvider extends OrchidServiceProvider
         return [
 
             Menu::make('Platform Configuration')
-                ->icon('wrench')
+                ->icon('arrow-down')
                 ->list([
                     Menu::make(__('Phases'))
                         ->icon('wrench')
-                        ->title(__('Tournament Config'))
                         ->route('platform.systems.phases')
                         ->permission('platform.systems.phases'),
+                    Menu::make(__('Games'))
+                        ->icon('wrench')
+                        ->route('platform.systems.games')
+                        ->permission('platform.systems.games'),
                 ]),
 
 
