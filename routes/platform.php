@@ -9,7 +9,8 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
-use App\Orchid\Screens\GamesListScreen;
+use App\Orchid\Screens\Game\GameEditScreen;
+use App\Orchid\Screens\Game\GameListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -146,11 +147,29 @@ Route::screen('phases/{phase}/edit', PhaseEditScreen::class)
             ->push(__('Role'), route('platform.systems.phases.edit', $phase));
     });
 
-Route::screen('/games', GamesListScreen::class)
+Route::screen('/games', GameListScreen::class)
     ->name('platform.systems.games')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
-            ->push(__('Phases'), route('platform.systems.phases'));
+            ->push(__('Games'), route('platform.systems.games'));
     });
+
+Route::screen('/games/create', GameEditScreen::class)
+    ->name('platform.systems.games.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('GamesEdit'), route('platform.systems.games.create'));
+    });
+
+
+Route::screen('/games/{game?}', GameEditScreen::class)
+    ->name('platform.systems.games.edit')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('GamesEdit'), route('platform.systems.games.create'));
+    });
+
 

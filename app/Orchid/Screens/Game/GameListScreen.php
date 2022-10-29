@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\Game;
 
 use App\Models\Game;
+use App\Orchid\Layouts\System\Game\GameListLayout;
+use Orchid\Screen\Action;
+use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
-class GamesListScreen extends Screen
+class GameListScreen extends Screen
 {
     /**
      * Query data.
@@ -36,26 +40,42 @@ class GamesListScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'All Available Tournament Phases';
+        return 'All Available Games';
+    }
+
+    /**
+     * @return iterable|null
+     */
+    public function permission(): ?iterable
+    {
+        return [
+            'platform.systems.games',
+        ];
     }
 
     /**
      * Button commands.
      *
-     * @return \Orchid\Screen\Action[]
+     * @return Action[]
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Add'))
+                ->icon('plus')
+                ->route('platform.systems.games.create'),
+        ];
     }
 
     /**
      * Views.
      *
-     * @return \Orchid\Screen\Layout[]|string[]
+     * @return Layout[]|string[]
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+
+        ];
     }
 }

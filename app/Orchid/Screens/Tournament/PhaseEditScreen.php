@@ -3,7 +3,6 @@
 namespace App\Orchid\Screens\Tournament;
 
 use App\Models\Phase;
-use App\Models\PhaseSetting;
 use App\Orchid\Layouts\System\Phase\PhaseEditLayout;
 use App\Orchid\Layouts\System\Phase\PhaseSettingEditLayout;
 use App\Orchid\Layouts\System\Phase\PhaseSettingsListLayout;
