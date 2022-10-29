@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
 class Game extends Model
 {
     use HasFactory, Filterable, AsSource;
-
 
 
     /**
@@ -31,5 +32,8 @@ class Game extends Model
     'state_active'
     "];
 
-
+//    public function platform(): HasMany
+//    {
+//        return $this->hasMany(Platform::class);
+//    }
 }
