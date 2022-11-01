@@ -31,7 +31,7 @@ class Tournament extends Model
 
     protected DateTimeType $scheduledEndDate;
 
-    protected bool $public;
+    protected bool $isPublic;
 
     protected bool $online;
 
@@ -41,22 +41,22 @@ class Tournament extends Model
 
     // Registration
     protected bool $registrationEnabled;
-    protected DateTimeType $registrationOpeningDateTime;
+    protected DateTimeType $registrationOpeningTime;
     protected DateTimeType $registrationClosingTime;
 
 
     //TODO
 //    protected int $organisationId;
     protected string $contactEmail;
-    protected string $discord;
-    protected string $website;
+    protected string $discordUrl;
+    protected string $websiteUrl;
 
 
     protected string $description;
 
     protected string $rules;
 
-    protected array $prize;
+    protected array $prizes;
 
     //TODO
     protected bool $matchReportsEnabled;
@@ -67,8 +67,8 @@ class Tournament extends Model
     */
     protected bool $checkInEnabled;
     protected bool $checkInParticipantEnabled;
-    protected DateTimeType $checkInParticipantStartDateTime;
-    protected DateTimeType $checkInParticipantEndDateTime;
+    protected DateTimeType $checkInParticipantStartTime;
+    protected DateTimeType $checkInParticipantEndTime;
 
     protected bool $isArchived;
 
