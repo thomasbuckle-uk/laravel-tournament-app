@@ -47,6 +47,10 @@ class PlatformProvider extends OrchidServiceProvider
                         ->permission('platform.systems.games'),
                 ]),
 
+            Menu::make(__('Tournaments'))
+                ->icon('wrench')
+            ->route('platform.tournaments')
+            ->permission('platform.tournaments'),
 
             Menu::make(__('Users'))
                 ->icon('user')
@@ -84,6 +88,10 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('System'))
                 ->addPermission('platform.systems.roles', __('Roles'))
                 ->addPermission('platform.systems.users', __('Users')),
+            ItemPermission::group(__('Tournaments'))
+                ->addPermission('platform.tournaments', __('Tournaments'))
+                ->addPermission('platform.tournaments.create', __('Create Tournaments'))
+                ->addPermission('platform.tournaments.edit', __('Edit Tournaments')),
         ];
     }
 }

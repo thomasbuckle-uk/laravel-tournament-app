@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens\Tournament;
+namespace App\Orchid\Screens\Tournament\Phase;
 
 use App\Models\Phase;
 use App\Orchid\Layouts\System\Phase\PhaseEditLayout;
@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
 class PhaseEditScreen extends Screen

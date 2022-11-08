@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Screens\Tournament;
+namespace App\Orchid\Screens\Tournament\Phase;
 
 use App\Models\Phase;
 use App\Orchid\Layouts\System\Phase\PhaseListLayout;

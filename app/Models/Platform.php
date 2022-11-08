@@ -10,7 +10,9 @@ use Orchid\Screen\AsMultiSource;
 
 class Platform extends Model
 {
-    use HasFactory, Filterable, AsMultiSource;
+    use AsMultiSource;
+    use Filterable;
+    use HasFactory;
 
     protected $fillable = [
         'platform_name',
