@@ -12,6 +12,7 @@
         "laravel/framework": "^9.19",
         "laravel/jetstream": "^2.10",
         "laravel/sanctum": "^2.8",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "orchid/crud": "^3.8",
         "orchid/platform": "^13.3",
