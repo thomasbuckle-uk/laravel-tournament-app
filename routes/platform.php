@@ -17,6 +17,7 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\Tournament\Create\TournamentCreateScreen;
 use App\Orchid\Screens\Tournament\Phase\PhaseEditScreen;
 use App\Orchid\Screens\Tournament\Phase\PhaseListScreen;
+use App\Orchid\Screens\Tournament\TournamentEditScreen;
 use App\Orchid\Screens\Tournament\TournamentListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
@@ -179,6 +180,11 @@ Route::screen('/games/{game?}', GameEditScreen::class)
 
 Route::screen('/tournaments', TournamentListScreen::class)
     ->name('platform.tournaments')
+    ->breadcrumbs(function (Trail $trail) {
+    });
+
+Route::screen('/tournaments/{tournament?}', TournamentEditScreen::class)
+    ->name('platform.tournaments.edit')
     ->breadcrumbs(function (Trail $trail) {
     });
 

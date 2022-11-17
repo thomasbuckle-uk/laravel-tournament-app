@@ -6,11 +6,12 @@ use Doctrine\DBAL\Types\DateTimeType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Orchid\Screen\AsMultiSource;
 
 class Tournament extends Model
 {
     use HasFactory;
-
+    use AsMultiSource;
 
     /*
      * Model Properties
