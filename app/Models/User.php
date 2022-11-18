@@ -6,6 +6,7 @@ use App\Orchid\Presenters\UserPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Orchid\Access\UserAccess;
 use Orchid\Access\UserInterface;
@@ -17,7 +18,14 @@ use Orchid\Support\Facades\Dashboard;
 
 class User extends Authenticatable implements UserInterface
 {
-    use Notifiable, UserAccess, AsSource, Filterable, Chartable, HasFactory, HasTeams;
+    use AsSource;
+    use Chartable;
+    use Filterable;
+    use HasFactory;
+    use HasTeams;
+    use Notifiable;
+    use UserAccess;
+    use HasProfilePhoto;
 
     /**
      * The attributes that are mass assignable.
@@ -106,4 +114,6 @@ class User extends Authenticatable implements UserInterface
     {
         return new UserPresenter($this);
     }
+
+
 }

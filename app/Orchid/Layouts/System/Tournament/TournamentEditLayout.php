@@ -3,6 +3,8 @@
 namespace App\Orchid\Layouts\System\Tournament;
 
 use Orchid\Screen\Field;
+use Orchid\Screen\Fields\CheckBox;
+use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
@@ -75,6 +77,20 @@ class TournamentEditLayout extends Rows
                 ->disabled()
                 ->title(__('List of prizes, turn into JSON Columns add table eventually'))
                 ->placeholder('Description...'),
+
+            CheckBox::make('tournaments.is_public')
+                ->sendTrueOrFalse()
+            ->title('Is Public Tournament?')
+            ->help("Uncheck this to set tournament to private | Doesn't do anything yet"),
+
+            DateTimer::make('tournament.scheduled_start_date')
+                ->title('Scheduled Start Date & Time')
+                ->enableTime()
+                ->required(),
+
+            DateTimer::make('tournament.scheduled_end_date')
+                ->title('Scheduled End Date & Time | Leave blank if required')
+                ->enableTime(),
         ];
     }
 }

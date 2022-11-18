@@ -4,7 +4,9 @@ namespace App\Orchid\Screens\Tournament;
 
 use App\Models\Phase;
 use App\Models\Tournament;
+use App\Orchid\Layouts\System\Tournament\TournamentEditContactLayout;
 use App\Orchid\Layouts\System\Tournament\TournamentEditLayout;
+use App\Orchid\Layouts\System\Tournament\TournamentEditRegistrationLayout;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Action;
@@ -88,12 +90,17 @@ class TournamentEditScreen extends Screen
 
         return [
 
-//                Layout::block(PhaseEditLayout::class)
-//                    ->title(__('Phase Information'))
-//                    ->description(__('Enter Phase Name and Description here')),
             Layout::block(TournamentEditLayout::class)
             ->title(__('Tournament Basic Info'))
-            ->description(__('Enter Basic Tournament Info Here'))
+            ->description(__('Enter Basic Tournament Info Here')),
+
+            Layout::block(TournamentEditRegistrationLayout::class)
+            ->title('Tournament Registration Options')
+            ->description(__('Settings to control or limit registration types')),
+
+
+            Layout::block(TournamentEditContactLayout::class)
+                ->title('Tournament Contact Options'),
         ];
     }
 
