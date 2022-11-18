@@ -13,12 +13,11 @@ use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class TournamentEditScreen extends Screen
 {
 
-
+    public Tournament $tournament;
 
     /**
      * Query data.
@@ -41,7 +40,7 @@ class TournamentEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Edit Tournament';
+        return $this->tournament->exists ? 'Edit Tournament' : 'Create Tournament';
     }
 
     /**
@@ -51,7 +50,7 @@ class TournamentEditScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Edit Tournament Details Here';
+        return 'Create a new Tournament or Edit an existing one';
     }
 
     /**
@@ -59,9 +58,7 @@ class TournamentEditScreen extends Screen
      */
     public function permission(): ?iterable
     {
-        return [
-            'platform.tournaments.edit',
-        ];
+        return ['platform.tournaments.create'];
     }
 
     /**
@@ -87,16 +84,15 @@ class TournamentEditScreen extends Screen
      */
     public function layout(): iterable
     {
-
         return [
 
             Layout::block(TournamentEditLayout::class)
-            ->title(__('Tournament Basic Info'))
-            ->description(__('Enter Basic Tournament Info Here')),
+                ->title(__('Tournament Basic Info'))
+                ->description(__('Enter Basic Tournament Info Here')),
 
             Layout::block(TournamentEditRegistrationLayout::class)
-            ->title('Tournament Registration Options')
-            ->description(__('Settings to control or limit registration types')),
+                ->title('Tournament Registration Options')
+                ->description(__('Settings to control or limit registration types')),
 
 
             Layout::block(TournamentEditContactLayout::class)
@@ -104,14 +100,17 @@ class TournamentEditScreen extends Screen
         ];
     }
 
-    public function save(Phase $phase, Request $request): RedirectResponse
+    public function save(Tournament $tournament, Request $request): RedirectResponse
     {
-//        $phase->fill($request->collect('phase')->except(['phase_name_slug'])->toArray())
-//            ->fill(['phase_name_slug' => Str::of($request->input('phase.phase_name'))->slug('-') ])
-//            ->save();
-        Toast::info(__('Test'));
-        return redirect()->route('platform.tournaments');
 
+        $tournament->fill($request->collect('tournament')->except(['prizes', 'platforms'])->toArray())
+            ->fill([
+                'prizes' => json_encode($request->input('tournament.prizes')),
+                'platforms' => json_encode( $request->input('tournament.platforms'))
+            ])
+            ->save();
+
+        return redirect()->route('platform.tournaments');
     }
 
 }

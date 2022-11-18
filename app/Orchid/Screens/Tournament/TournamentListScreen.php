@@ -45,7 +45,7 @@ class TournamentListScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'All Active Tournaments';
+        return 'All Tournaments';
     }
 
     /**

@@ -6,6 +6,7 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Matrix;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Layouts\Rows;
@@ -33,16 +34,19 @@ class TournamentEditLayout extends Rows
                 ->title(__('The complete name of the tournament.'))
                 ->placeholder('Description...'),
 
-            Input::make('tournament.participant_type')
-                ->type('text')
+            Select::make('tournament.participant_type')
+                ->options([
+                    'solo' => 'Individual',
+                    'team' => 'Team',
+                ])
                 ->required()
-                ->title(__('Replace with drop down eventually'))
-                ->placeholder('Description...'),
+                ->title(__('Participant type (Solo or Team)'))
+                ->help('Description...'),
 
             Input::make('tournament.size')
-                ->type('text')
+                ->type('number')
                 ->required()
-                ->title(__('Size of team/solo (EG 1)'))
+                ->title(__('Max Number or Teams or Particpents allowed.'))
                 ->placeholder('Description...'),
 
             Input::make('tournament.timezone')
@@ -54,9 +58,9 @@ class TournamentEditLayout extends Rows
 
             Select::make('tournament.platforms')
                 ->options([
-                    '1' => 'PC',
-                    '2' => 'Xbox',
-                    '3' => 'PS5'
+                    'PC' => 'PC',
+                    'Xbox' => 'Xbox',
+                    'PS5' => 'PS5'
                 ])
                 ->multiple()
                 ->title(__('Available Platforms EG PC, Console'))
@@ -72,11 +76,13 @@ class TournamentEditLayout extends Rows
                 ->title(__('Long text for rules of tournament'))
                 ->placeholder('Description...'),
 
-            Input::make('tournament.prizes')
-                ->type('text')
-                ->disabled()
-                ->title(__('List of prizes, turn into JSON Columns add table eventually'))
-                ->placeholder('Description...'),
+            Matrix::make('tournament.prizes')
+                ->title(__('List of prizes'))
+                ->columns([
+                    'Position',
+                    'Amount',
+                ]),
+
 
             CheckBox::make('tournaments.is_public')
                 ->sendTrueOrFalse()
@@ -90,7 +96,8 @@ class TournamentEditLayout extends Rows
 
             DateTimer::make('tournament.scheduled_end_date')
                 ->title('Scheduled End Date & Time | Leave blank if required')
-                ->enableTime(),
+                ->enableTime()
+                ->required(),
         ];
     }
 }

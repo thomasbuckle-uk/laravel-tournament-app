@@ -12,7 +12,7 @@ class Tournament extends Model
 {
     use HasFactory;
     use AsMultiSource;
-
+    protected $guarded = [];
     /*
      * Model Properties
      * */
