@@ -17,11 +17,10 @@ class TournamentEditRegistrationLayout extends Rows
                 ->help("Limits Registration to between start and end dates | Add more logic here eventually"),
 
             DateTimer::make('tournament.registration_opening_time')
-                ->title('Scheduled Registration Start Date & Time')
-                ->enableTime(),
+                ->title('Scheduled Registration Start Date & Time'),
+
             DateTimer::make('tournament.registration_closing_time')
                 ->title('Scheduled Registration Closing Date & Time')
-                ->enableTime(),
         ];
     }
 }
