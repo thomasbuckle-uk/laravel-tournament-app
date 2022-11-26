@@ -12,6 +12,7 @@ class Tournament extends Model
 {
     use HasFactory;
     use AsMultiSource;
+
     protected $guarded = [];
     /*
      * Model Properties
@@ -108,6 +109,32 @@ class Tournament extends Model
     protected int $minTeamSize;
 
     protected int $maxTeamSize;
+
+
+    protected $casts = [
+        'scheduled_start_date' => 'datetime',
+        'schedule_end_date' => 'datetime',
+        'registration_opening_time' => 'datetime',
+        'registration_closing_time' => 'datetime',
+        'check_in_participant_start_time' => 'datetime:h:i K',
+        'check_in_participant_end_time' => 'datetime:h:i K',
+    ];
+
+    protected $attributes = [
+        'is_public' => true,
+        'registration_enabled' => false,
+        'match_reports_enabled' => false,
+        'check_in_enabled' => false,
+        'check_in_participant_enabled' => false,
+        'is_archived' => false,
+        'registration_notification_enabled' => false,
+        'registration_participant_email_enabled' => false,
+        'registration_terms_enabled' => false,
+        'registration_terms_url' => null,
+        'registration_request_message' => 'Thank you for registering for this tournament, if you are accepted you will receive a further email',
+        'registration_acceptance_message' => 'You have been accepted for this tournament',
+        'registration_refusal_message' => 'You have not been accepted for this tournament'
+    ];
 
     /**
      * Return Game Model for this tournament
