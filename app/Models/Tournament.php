@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Doctrine\DBAL\Types\DateTimeType;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -136,6 +138,11 @@ class Tournament extends Model
         'registration_refusal_message' => 'You have not been accepted for this tournament'
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+    }
+
     /**
      * Return Game Model for this tournament
      * @return HasOne
@@ -143,5 +150,21 @@ class Tournament extends Model
     public function game(): HasOne
     {
         return $this->hasOne(Game::class);
+    }
+
+
+    /**
+     * Return's upcoming public tournaments that can be registered for
+     * @return Collection
+     */
+    public static function upcomingTournaments(): Collection
+    {
+        return static::where('is_public', '=', true)
+            ->where('is_archived', '=', false)
+            ->where('registration_enabled', '=', true)
+            ->where( function($query) {
+                $query->where('registration_opening_time', '<=', Carbon::now())
+                    ->where('registration_closing_time', '>=', Carbon::now());
+            })->get();
     }
 }

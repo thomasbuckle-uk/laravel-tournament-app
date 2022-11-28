@@ -1,23 +1,36 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import TournamentList from '../Partials/TournamentList.vue'
+
+
+defineProps({
+    upcomingTournaments: Array,
+    permissions: Object,
+});
 </script>
 
 <template>
     <AppLayout title="Dashboard">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-Test
-            </h2>
-        </template>
+        <div class="container w-full center mt-10">
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="overflow-hidden shadow-xl sm:rounded-lg">
-                    <TournamentList></TournamentList>
+            <div class="mt-24 flex justify-center">
+                <div class="text-lg max-w-prose mx-auto">
+                    <h1>
+                        <span class="mt-2 block text-xl text-center leading-8 font-medium tracking-tight text-white sm:text-4xl">Tournaments</span>
+                    </h1>
+                    <p class="mt-4 text-center text-gray-500 leading-8"></p>
                 </div>
             </div>
+
+                    <TournamentList
+                        :tournaments="upcomingTournaments"
+                    ></TournamentList>
+
+
+
         </div>
+
+
 
 
     </AppLayout>

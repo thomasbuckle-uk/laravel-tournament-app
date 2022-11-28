@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\Jetstream\UpdateTeamProfileInformation;
+use App\Http\Controllers\Dashboard\Tournament\Overview;
 use App\Http\Controllers\TeamDashController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Gate;
@@ -114,12 +115,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group( function() {
-    Route::get('/tournaments/overview', static function () {
-        return Inertia::render('Tournaments/Overview/Show', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-        ]);
-    })->name('tournaments.overview');
+    Route::get('/tournaments/overview', [Overview::class, 'show']
+    )->name('tournaments.overview');
 });
 
 
