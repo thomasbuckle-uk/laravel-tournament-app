@@ -8,6 +8,7 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
+        './resources/images/**'
     ],
 
     theme: {
@@ -37,14 +38,14 @@ module.exports = {
                 'ultrawide': '1920px'
             },
             backgroundImage: {
-                'hero-warzone': "linear-gradient(to bottom, #14151961 0%, #141519 80%), url('assets/images/hero_background.png')"
+                'hero-warzone': "linear-gradient(to bottom, #14151961 0%, #141519 80%), url('../assets/images/hero_background.png')"
             }
         },
     },
     variants: {
         extend: {
             backgroundImage: {
-                'hero-warzone': "linear-gradient(to bottom, #14151961 0%, #141519 80%), url('~/assets/images/home/hero_background.png')"
+                'hero-warzone': "linear-gradient(to bottom, #14151961 0%, #141519 80%), url('../assets/images/home/hero_background.png')"
             }
         },
     },
