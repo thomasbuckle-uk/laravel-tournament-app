@@ -65,11 +65,6 @@ const navigation = [
 
 
 
-                <template v-if="permissions.canDeleteTeam && ! team.personal_team">
-                    <JetSectionBorder/>
-
-                    <DeleteTeamForm class="mt-10 sm:mt-0" :team="team"/>
-                </template>
             </div>
         </div>
     </AppLayout>
