@@ -20,7 +20,6 @@ const props = defineProps({
 
                         <div class=" bg-gray-800  rounded-md text-center py-1 text-center">
                             <p class="bg-gray-800 rounded-md  text-white uppercase ">{{ item.size }}</p>
-
                         </div>
                     </div>
                 </div>

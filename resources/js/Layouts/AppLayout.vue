@@ -57,7 +57,7 @@ const logout = () => {
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex uppercase font-bold">
                                 <JetNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </JetNavLink>
@@ -65,7 +65,7 @@ const logout = () => {
                                     My Team
                                 </JetNavLink>
                                 <JetNavLink :href="route('tournaments.overview')" :active="route().current('tournaments.overview')">
-                                    My Tournaments
+                                    Tournaments
                                 </JetNavLink>
                             </div>
                         </div>
@@ -118,7 +118,7 @@ const logout = () => {
                                 <JetDropdown align="right" width="48">
                                     <template #trigger>
                                         <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                            <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_path" :alt="$page.props.user.name">
+                                            <img class="h-8 w-8 rounded-full object-cover" :src="'/storage/' + $page.props.user.profile_photo_path" :alt="$page.props.user.name">
                                         </button>
 
                                         <span v-else class="inline-flex rounded-md">

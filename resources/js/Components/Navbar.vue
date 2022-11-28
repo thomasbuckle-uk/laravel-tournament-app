@@ -158,30 +158,30 @@ defineProps({
                             </a> -->
 
                             <div class="hidden md:flex md:items-center md:space-x-6">
-                                <a
-                                    href="#"
-                                    class="hidden ml-6 p-2 text-white hover:text-gray-300 lg:block"
-                                >
-                                    <span class="sr-only">Search</span>
-                                    <SearchIcon class="w-6 h-6" aria-hidden="true"/>
-                                </a>
-                                <a
-                                    href="#"
-                                    class="hidden text-white hover:text-gray-300 lg:flex lg:items-center"
-                                >
-                                    <img
-                                        src="https://tailwindui.com/img/flags/flag-canada.svg"
-                                        alt="Canadian Flag"
-                                        class="w-5 h-auto block flex-shrink-0"
-                                    />
-                                    <span class="ml-3 block text-base font-medium"> English </span>
-                                    <span class="sr-only">, change language</span>
-                                </a>
+<!--                                <a-->
+<!--                                    href="#"-->
+<!--                                    class="hidden ml-6 p-2 text-white hover:text-gray-300 lg:block"-->
+<!--                                >-->
+<!--                                    <span class="sr-only">Search</span>-->
+<!--                                    <SearchIcon class="w-6 h-6" aria-hidden="true"/>-->
+<!--                                </a>-->
+<!--                                <a-->
+<!--                                    href="#"-->
+<!--                                    class="hidden text-white hover:text-gray-300 lg:flex lg:items-center"-->
+<!--                                >-->
+<!--                                    <img-->
+<!--                                        src="https://tailwindui.com/img/flags/flag-canada.svg"-->
+<!--                                        alt="Canadian Flag"-->
+<!--                                        class="w-5 h-auto block flex-shrink-0"-->
+<!--                                    />-->
+<!--                                    <span class="ml-3 block text-base font-medium"> English </span>-->
+<!--                                    <span class="sr-only">, change language</span>-->
+<!--                                </a>-->
 
 
                                 <div v-if="canLogin" >
                                     <Link v-if="$page.props.user" :href="route('dashboard')"
-                                          class="text-sm text-gray-700 underline">
+                                          class="text-white bg-[#C10013] rounded-md p-2">
                                         Dashboard
                                     </Link>
 
