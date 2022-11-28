@@ -1,5 +1,5 @@
 <script setup>
-
+import {Head, Link} from '@inertiajs/inertia-vue3';
 const props = defineProps({
     tournaments: Object,
 });
@@ -32,7 +32,10 @@ const props = defineProps({
                    </div>
 
                     <div class="w-1/3 ">
-                        <button class="rounded-md bg-red-700 p-2">Details</button>
+                        <Link :href="route('tournaments.details' , item.id)"
+                              class="text-white bg-[#C10013] rounded-md p-2">
+                            Details
+                        </Link>
                     </div>
                 </div>
 

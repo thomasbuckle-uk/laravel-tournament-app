@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\Jetstream\UpdateTeamProfileInformation;
+use App\Http\Controllers\Dashboard\Tournament\Details;
 use App\Http\Controllers\Dashboard\Tournament\Overview;
 use App\Http\Controllers\TeamDashController;
 use Illuminate\Foundation\Application;
@@ -117,6 +118,9 @@ Route::middleware([
 ])->group( function() {
     Route::get('/tournaments/overview', [Overview::class, 'show']
     )->name('tournaments.overview');
+
+    Route::get('/tournaments/details/{tournament}', [Details::Class, 'show']
+    )->name('tournaments.details');
 });
 
 
