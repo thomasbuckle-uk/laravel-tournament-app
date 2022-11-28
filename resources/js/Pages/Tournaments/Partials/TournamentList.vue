@@ -41,32 +41,7 @@ const props = defineProps({
 
 
         </li>
-        <li v-for="item in tournaments" :key="item.id"
-            class="h-80 rounded-lg bg-no-repeat bg-center bg-cover " :style="{'background-image': 'url(../assets/images/warzone-cover.jpg)'}">
-            <div class="flex flex-col h-full">
-                <div class="text-white basis-2/3"></div>
-                <div class="text-white basis-1/3 bg-black bg-opacity-75 bg-gradient-to-t from-black">
 
-                    <p class="text-white">{{ item.tournament_name }}</p>
-                </div>
-
-            </div>
-
-
-        </li>
-        <li v-for="item in tournaments" :key="item.id"
-            class="h-80 rounded-lg bg-no-repeat bg-center bg-cover " :style="{'background-image': 'url(../assets/images/warzone-cover.jpg)'}">
-            <div class="flex flex-col h-full">
-                <div class="text-white basis-2/3"></div>
-                <div class="text-white basis-1/3 bg-black bg-opacity-75 bg-gradient-to-t from-black">
-
-                    <p class="text-white">{{ item.tournament_name }}</p>
-                </div>
-
-            </div>
-
-
-        </li>
 
     </ul>
 </template>
