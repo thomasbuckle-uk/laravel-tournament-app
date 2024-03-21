@@ -1,4 +1,4 @@
-# VGL Tournament Platform
+# Laravel Tournament Platform
 
 ## Description
 
